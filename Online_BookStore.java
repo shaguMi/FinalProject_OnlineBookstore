@@ -5,7 +5,7 @@ import java.util.*;
     public class Online_BookStore {
         static ArrayList<Book> checkedOutBooks = new ArrayList<Book>();
         public static void main(String[] args) {
-        System.out.println("Selamat Datang Di ToKO Buku Online - Team-TWO");
+        System.out.println("Selamat Datang Di Toko Buku Online - Team-TWO");
         System.out.println(" ");
 
         ArrayList<Category> listCategory = createBookCategories();
@@ -41,12 +41,16 @@ import java.util.*;
         System.out.println("Buku yang akan dibeli : ");
         for (int i = 1; i <= checkedOutBooks.size(); i++) {
                 Book book = checkedOutBooks.get(i-1);
-                System.out.println(i+". "+book.getName()+" - "+book.getAuthor()+" - "+book.getPrice());
+                System.out.println(i+". "+book.getName()+" - "+book.getAuthor()+" - Rp. "+book.getPrice());
         totHarga += book.getPrice();
         }
-        
+        System.out.println("");
+        System.out.println("==============================================");
         System.out.println("Total Pembelian Buku : Rp. "+ totHarga);
+        System.out.println("");
         System.out.println("Silahkan menyelesaikan pembayaran Anda di kasir");
+        System.out.println("");
+        System.out.println("");
         System.out.println("Terima kasih telah berbelanja ke Toko Buku - Team TWO"); 
     }
     
@@ -112,11 +116,9 @@ import java.util.*;
                         System.out.println(i + ". " + book.getName()+" - "+book.getAuthor()+" - Rp. "+book.getPrice());
                         listBookByCat.put(i, book);
                 }
-
                 break;
             }
         }
-        
         Scanner scanAns = new Scanner(System.in);
         System.out.println("Apakah ada buku yang kamu cari [y/t]: ");
         String cari = scanAns.nextLine();
@@ -124,25 +126,39 @@ import java.util.*;
             return true;
         }
 
-        System.out.println("Pilih buku yang akan dibeli(jika lebih dari 1 maka gunakan koma) :");
-        String pilihBook = scanAns.nextLine();
+        boolean validInput;
+        do {
+            validInput = true;
+            String jawaban = scanAns.nextLine();
+            System.out.println("Pilih buku yang akan dibeli(jika lebih dari 1 maka gunakan koma) :");
+            String pilihBook = scanAns.nextLine();
 
-        // make arraylist choices
-        String [] selectedBooks = pilihBook.split(",");
-        for (String selectedBookStr : selectedBooks) {
-                int selectedBookInt = Integer.parseInt(selectedBookStr);
-                Book book = listBookByCat.get(selectedBookInt); 
-                checkedOutBooks.add(book);     
-        }
+             // make arraylist choices
+            String [] selectedBooks = pilihBook.split(",");
+            for (String selectedBookStr : selectedBooks) {
+                try {
+                    int selectedBookInt = Integer.parseInt(selectedBookStr);
+                    Book book = listBookByCat.get(selectedBookInt); 
+                    checkedOutBooks.add(book);   
+            
+            } catch (NumberFormatException e) {
+                // TODO: handle exception
+                System.out.println("Input tidak valid. Pastikan Anda memasukkan angka atau angka dipisahkan oleh koma. Contoh: 1,2,3"); 
+                validInput = false;
+                break; //keluar dari loop, mengulangi pemilihan buku
+            }        
+        } 
         
-
+    } while (!validInput);
         System.out.println("Apakah anda mencari buku yang lain [y/t] : ");
         String jawaban = scanAns.nextLine();
 
         if (jawaban.equalsIgnoreCase("y")) {
                 return true;
-        } else {
+        } else 
+        {
                 return false;
         }
     }
-    }
+}
+
