@@ -38,13 +38,13 @@ import java.util.*;
         while (ulangi == true);
 
         double totHarga = 0.0;
+        System.out.println("===============================================");
         System.out.println("Buku yang akan dibeli : ");
         for (int i = 1; i <= checkedOutBooks.size(); i++) {
                 Book book = checkedOutBooks.get(i-1);
                 System.out.println(i+". "+book.getName()+" - "+book.getAuthor()+" - Rp. "+book.getPrice());
         totHarga += book.getPrice();
         }
-        System.out.println("");
         System.out.println("==============================================");
         System.out.println("Total Pembelian Buku : Rp. "+ totHarga);
         System.out.println("");
@@ -119,8 +119,9 @@ import java.util.*;
                 break;
             }
         }
+        System.out.println("");
         Scanner scanAns = new Scanner(System.in);
-        System.out.println("Apakah ada buku yang kamu cari [y/t]: ");
+        System.out.print("Apakah ada buku yang kamu cari [y/t]: ");
         String cari = scanAns.nextLine();
         if (cari.equalsIgnoreCase("t")) {
             return true;
@@ -130,7 +131,7 @@ import java.util.*;
         do {
             validInput = true;
             String jawaban = scanAns.nextLine();
-            System.out.println("Pilih buku yang akan dibeli(jika lebih dari 1 maka gunakan koma) :");
+            System.out.print("Pilih buku yang akan dibeli(jika lebih dari 1 maka gunakan koma) :");
             String pilihBook = scanAns.nextLine();
 
              // make arraylist choices
@@ -150,7 +151,8 @@ import java.util.*;
         } 
         
     } while (!validInput);
-        System.out.println("Apakah anda mencari buku yang lain [y/t] : ");
+        System.out.println("");
+        System.out.print("Apakah anda mencari buku yang lain [y/t] : ");
         String jawaban = scanAns.nextLine();
 
         if (jawaban.equalsIgnoreCase("y")) {
@@ -161,4 +163,5 @@ import java.util.*;
         }
     }
 }
+
 
