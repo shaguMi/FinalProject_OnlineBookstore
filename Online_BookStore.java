@@ -119,6 +119,7 @@ import java.util.*;
                 break;
             }
         }
+
         System.out.println("");
         Scanner scanAns = new Scanner(System.in);
         System.out.print("Apakah ada buku yang kamu cari [y/t]: ");
@@ -130,7 +131,6 @@ import java.util.*;
         boolean validInput;
         do {
             validInput = true;
-            String jawaban = scanAns.nextLine();
             System.out.print("Pilih buku yang akan dibeli(jika lebih dari 1 maka gunakan koma) :");
             String pilihBook = scanAns.nextLine();
 
@@ -139,29 +139,29 @@ import java.util.*;
             for (String selectedBookStr : selectedBooks) {
                 try {
                     int selectedBookInt = Integer.parseInt(selectedBookStr);
-                    Book book = listBookByCat.get(selectedBookInt); 
-                    checkedOutBooks.add(book);   
-            
-            } catch (NumberFormatException e) {
-                // TODO: handle exception
-                System.out.println("Input tidak valid. Pastikan Anda memasukkan angka atau angka dipisahkan oleh koma. Contoh: 1,2,3"); 
-                validInput = false;
-                break; //keluar dari loop, mengulangi pemilihan buku
-            }        
-        } 
-        
-    } while (!validInput);
+                    Book book = listBookByCat.get(selectedBookInt);
+                    checkedOutBooks.add(book);
+
+                } catch (NumberFormatException e) {
+                    // TODO: handle exception
+                    System.out.println("Input tidak valid. Pastikan Anda memasukkan angka atau angka dipisahkan oleh koma. Contoh: 1,2,3");
+                    validInput = false;
+                    break; // keluar dari loop, mengulangi pemilihan buku
+                }
+            }
+        } while (!validInput);
+
         System.out.println("");
         System.out.print("Apakah anda mencari buku yang lain [y/t] : ");
         String jawaban = scanAns.nextLine();
 
         if (jawaban.equalsIgnoreCase("y")) {
-                return true;
-        } else 
-        {
-                return false;
+            return true;
+        } else {
+            return false;
         }
     }
 }
+
 
 
